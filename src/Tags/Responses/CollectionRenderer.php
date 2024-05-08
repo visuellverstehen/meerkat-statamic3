@@ -273,7 +273,7 @@ class CollectionRenderer extends MeerkatTag
     {
         $context = new RuntimeContext();
         $context->parameters = $this->getParameterArray();
-        $context->context = $this->context->toArray();
+        $context->context = $this->context;
 
         return $context;
     }
@@ -484,7 +484,7 @@ class CollectionRenderer extends MeerkatTag
 
         return $this->parseComments([
             $collectionName => $displayComments,
-        ], $this->context->toArray(), $collectionName);
+        ], $collectionName);
     }
 
     /**
@@ -515,11 +515,10 @@ class CollectionRenderer extends MeerkatTag
      * Renders a recursive thread.
      *
      * @param  array  $data The comment data.
-     * @param  array  $context The render context.
      * @param  string  $collectionName The name of the collection.
      * @return array
      */
-    protected function parseComments($data = [], $context = [], $collectionName = 'comments')
+    protected function parseComments($data = [], $collectionName = 'comments')
     {
         $metaData = [];
         $totalResults = count($data[$collectionName]);
